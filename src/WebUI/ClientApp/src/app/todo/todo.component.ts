@@ -7,6 +7,8 @@ import {
   CreateTodoListCommand, UpdateTodoListCommand,
   CreateTodoItemCommand, UpdateTodoItemDetailCommand
 } from '../web-api-client';
+import { FormControl } from '@angular/forms';
+import { ThemePalette } from '@angular/material/core';
 
 @Component({
   selector: 'app-todo-component',
@@ -32,9 +34,15 @@ export class TodoComponent implements OnInit {
     id: [null],
     listId: [null],
     priority: [''],
-    note: ['']
+    note: [''],
+    color: ['#fff']
   });
+  hexColor : any = "#fff";
 
+  disabled = false;
+  formatColor: ThemePalette = 'primary';
+  touchUi = false;
+  colorCtr = new FormControl('');
 
   constructor(
     private listsClient: TodoListsClient,
@@ -146,7 +154,8 @@ export class TodoComponent implements OnInit {
     });
   }
 
-  updateItemDetails(): void {
+  updateItemDetails(selectedItem: any): void {
+    this.itemDetailsFormGroup.value.color = selectedItem.color? '#' + selectedItem.color.hex : '#fff';
     const item = new UpdateTodoItemDetailCommand(this.itemDetailsFormGroup.value);
     this.itemsClient.updateItemDetails(this.selectedItem.id, item).subscribe(
       () => {

@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 
 /* Provide sufficient contrast against white background */
 a {
@@ -23,3 +25,11 @@ code {
 
 /* Importing Bootstrap Icons SCSS file. */
 @import '../node_modules/bootstrap-icons/font/bootstrap-icons';
+
+.modal-backdrop {
+  z-index: 100;
+}
+
+.modal {
+  z-index: 100;
+}
